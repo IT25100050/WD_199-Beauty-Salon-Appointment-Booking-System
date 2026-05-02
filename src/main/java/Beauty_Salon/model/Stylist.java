@@ -1,24 +1,23 @@
 package Beauty_Salon.model;
 
-
-
-public class Stylist {
+public class Stylist extends AbstractStaff {
 
     private Long id;
     private String name;
     private String specialty;
     private String email;
     private String phone;
-    private String status; // available, busy, off
+    private String status;
     private double rating;
     private int experienceYears;
+    private String type; // "senior" or "junior"
 
-    // Constructor
     public Stylist() {}
 
     public Stylist(Long id, String name, String specialty,
                    String email, String phone,
-                   String status, double rating, int experienceYears) {
+                   String status, double rating,
+                   int experienceYears, String type) {
         this.id = id;
         this.name = name;
         this.specialty = specialty;
@@ -27,6 +26,7 @@ public class Stylist {
         this.status = status;
         this.rating = rating;
         this.experienceYears = experienceYears;
+        this.type = type;
     }
 
     // Getters and Setters
@@ -54,5 +54,42 @@ public class Stylist {
     public int getExperienceYears() { return experienceYears; }
     public void setExperienceYears(int experienceYears) {
         this.experienceYears = experienceYears;
+    }
+
+    public String getType() { return type; }
+    public void setType(String type) { this.type = type; }
+
+    // Convert to file line
+    public String toFileString() {
+        return id + "," + name + "," + specialty + "," +
+                email + "," + phone + "," + status + "," +
+                rating + "," + experienceYears + "," + type;
+    }
+
+    // Create from file line
+    public static Stylist fromFileString(String line) {
+        String[] parts = line.split(",");
+        return new Stylist(
+                Long.parseLong(parts[0]),
+                parts[1], parts[2], parts[3],
+                parts[4], parts[5],
+                Double.parseDouble(parts[6]),
+                Integer.parseInt(parts[7]),
+                parts[8]
+        );
+    }
+
+    // Polymorphism
+    public String getRole() {
+        return "Stylist";
+    }
+
+    public String getDescription() {
+        return name + " is a " + getRole() +
+                " specializing in " + specialty;
+    }
+    @Override
+    public double calculateBonus() {
+        return rating * experienceYears * 10;
     }
 }
