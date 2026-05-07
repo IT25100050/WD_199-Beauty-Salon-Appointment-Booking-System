@@ -1,0 +1,183 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0
+         https://maven.apache.org/xsd/maven-4.0.0.xsd">
+
+    <modelVersion>4.0.0</modelVersion>
+
+    <!-- ══════════════════════════════════════════ -->
+    <!--           SPRING BOOT PARENT               -->
+    <!-- ══════════════════════════════════════════ -->
+    <parent>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-starter-parent</artifactId>
+        <version>3.4.5</version>
+        <relativePath/>
+    </parent>
+
+    <!-- ══════════════════════════════════════════ -->
+    <!--           PROJECT INFO                     -->
+    <!-- ══════════════════════════════════════════ -->
+    <groupId>com.beauty_salon</groupId>
+    <artifactId>Beauty_Salon</artifactId>
+    <version>0.0.1-SNAPSHOT</version>
+    <name>Beauty_Salon</name>
+    <description>Miracle Lady Salon - Appointment Booking System</description>
+
+    <!-- ══════════════════════════════════════════ -->
+    <!--           JAVA VERSION                     -->
+    <!-- ══════════════════════════════════════════ -->
+    <properties>
+        <java.version>17</java.version>
+    </properties>
+
+    <dependencies>
+
+        <!-- ══════════════════════════════════════════ -->
+        <!--        CORE - WEB AND REST API             -->
+        <!-- ══════════════════════════════════════════ -->
+
+        <!--
+            spring-boot-starter-web
+            Needed for: @RestController, @GetMapping, @PostMapping,
+                        @PutMapping, @DeleteMapping, @RequestBody,
+                        @PathVariable, @RequestParam, ResponseEntity
+            Used in: CustomerController, AppointmentController,
+                     FeedbackController, ServiceController,
+                     StylistController, AuthController
+        -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-web</artifactId>
+        </dependency>
+
+        <!-- ══════════════════════════════════════════ -->
+        <!--        DATABASE - JPA AND ORM              -->
+        <!-- ══════════════════════════════════════════ -->
+
+        <!--
+            spring-boot-starter-data-jpa
+            Needed for: @Entity, @Table, @Column, @Id, @GeneratedValue,
+                        @OneToMany, @ManyToOne, @JoinColumn, @PrePersist,
+                        @Enumerated, JpaRepository, @Repository,
+                        @Transactional
+            Used in: All model classes (Customer, Appointment, Feedback,
+                     SalonService, Stylist, User) and all Repository interfaces
+        -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-data-jpa</artifactId>
+        </dependency>
+
+        <!-- ══════════════════════════════════════════ -->
+        <!--        SECURITY                            -->
+        <!-- ══════════════════════════════════════════ -->
+
+        <!--
+            spring-boot-starter-security
+            Needed for: @EnableWebSecurity, SecurityFilterChain,
+                        HttpSecurity, BCryptPasswordEncoder,
+                        UserDetailsService, InMemoryUserDetailsManager,
+                        SessionCreationPolicy, @Configuration
+            Used in: SecurityConfig.java, GlobalExceptionHandler.java
+        -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-security</artifactId>
+        </dependency>
+
+        <!-- ══════════════════════════════════════════ -->
+        <!--        DATABASE DRIVERS                    -->
+        <!-- ══════════════════════════════════════════ -->
+
+        <!--
+            H2 In-Memory Database (for development and testing)
+            Access the console at: http://localhost:8080/h2-console
+            JDBC URL:   jdbc:h2:mem:salondb
+            Username:   sa
+            Password:   (leave empty)
+        -->
+        <dependency>
+            <groupId>com.h2database</groupId>
+            <artifactId>h2</artifactId>
+            <scope>runtime</scope>
+        </dependency>
+
+        <!--
+            MySQL Driver (for production - uncomment when deploying)
+            Requires MySQL server running and database created
+            application.properties:
+              spring.datasource.url=jdbc:mysql://localhost:3306/beauty_salon
+              spring.datasource.username=root
+              spring.datasource.password=yourpassword
+        -->
+        <!--
+        <dependency>
+            <groupId>com.mysql</groupId>
+            <artifactId>mysql-connector-j</artifactId>
+            <scope>runtime</scope>
+        </dependency>
+        -->
+
+        <!-- ══════════════════════════════════════════ -->
+        <!--        VALIDATION                          -->
+        <!-- ══════════════════════════════════════════ -->
+
+        <!--
+            spring-boot-starter-validation
+            Needed for: @NotNull, @NotBlank, @Email, @Min, @Max,
+                        @Size, @Valid on controller @RequestBody params
+            Used in: All DTO classes for input validation
+        -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-validation</artifactId>
+        </dependency>
+
+        <!-- ══════════════════════════════════════════ -->
+        <!--        TEST DEPENDENCIES                   -->
+        <!-- ══════════════════════════════════════════ -->
+
+        <!--
+            spring-boot-starter-test
+            Needed for: @SpringBootTest, @Test, JUnit 5, Mockito
+            Used in: BeautySalonApplicationTests.java
+        -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-test</artifactId>
+            <scope>test</scope>
+        </dependency>
+
+        <!--
+            spring-security-test
+            Needed for: @WithMockUser, SecurityMockMvcRequestPostProcessors
+            Used in: Security-related test classes
+        -->
+        <dependency>
+            <groupId>org.springframework.security</groupId>
+            <artifactId>spring-security-test</artifactId>
+            <scope>test</scope>
+        </dependency>
+
+    </dependencies>
+
+    <!-- ══════════════════════════════════════════ -->
+    <!--           BUILD                            -->
+    <!-- ══════════════════════════════════════════ -->
+    <build>
+        <plugins>
+            <!--
+                spring-boot-maven-plugin
+                Allows: mvn spring-boot:run
+                Creates: executable JAR with embedded Tomcat
+            -->
+            <plugin>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-maven-plugin</artifactId>
+            </plugin>
+        </plugins>
+    </build>
+
+</project>

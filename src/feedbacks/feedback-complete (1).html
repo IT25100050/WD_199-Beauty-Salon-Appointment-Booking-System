@@ -1,0 +1,1366 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MIRACLE LADY SALON — Feedback & Reviews</title>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Syne:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <style>
+/* ============================================================
+   MIRACLE LADY SALON — Feedback & Review Management
+   2026 Dark Luxury Style
+   Fonts: Playfair Display (serif) + Syne (geometric)
+   Import in <head>:
+   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Syne:wght@300;400;500;700&display=swap" rel="stylesheet">
+   ============================================================ */
+
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+/* ── CSS VARIABLES ── */
+:root {
+  --black: #0a0a0a;
+  --white: #f5f2ee;
+  --cream: #ede8e0;
+  --rose: #c9748a;
+  --rose-dark: #a3516a;
+  --rose-pale: #f5dde4;
+  --gold: #c8a96e;
+  --gold-light: #f0e4c8;
+  --charcoal: #1e1c1a;
+  --mid: #3d3835;
+  --muted: #7a736b;
+  --border: rgba(200, 169, 110, 0.2);
+  --border-strong: rgba(200, 169, 110, 0.45);
+  --glass: rgba(255, 255, 255, 0.04);
+  --glass-hover: rgba(255, 255, 255, 0.08);
+  --success: #7ab87a;
+  --danger: #c97474;
+  --warning: #c9a874;
+  --info: #74a0c9;
+  --pending-bg: rgba(201, 168, 116, 0.12);
+  --approved-bg: rgba(122, 184, 122, 0.12);
+  --rejected-bg: rgba(201, 116, 116, 0.12);
+}
+
+html { font-size: 14px; }
+
+/* ── BASE ── */
+body {
+  font-family: 'Syne', sans-serif;
+  background: var(--black);
+  color: var(--white);
+  min-height: 100vh;
+  overflow-x: hidden;
+}
+
+/* Ambient background glow */
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background:
+    radial-gradient(ellipse 60% 50% at 80% 20%, rgba(201, 116, 138, 0.07) 0%, transparent 60%),
+    radial-gradient(ellipse 50% 40% at 10% 80%, rgba(200, 169, 110, 0.05) 0%, transparent 60%);
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* Grain texture */
+body::after {
+  content: '';
+  position: fixed;
+  inset: 0;
+  opacity: 0.03;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* ── LAYOUT ── */
+#app {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+/* ── TOP NAVIGATION BAR ── */
+#navbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 16px 36px;
+  border-bottom: 1px solid var(--border);
+  background: rgba(10, 10, 10, 0.8);
+  backdrop-filter: blur(20px);
+  position: sticky;
+  top: 0;
+  z-index: 50;
+}
+
+#brand {
+  display: flex;
+  flex-direction: column;
+}
+
+#brand .label {
+  font-size: 9px;
+  letter-spacing: 0.3em;
+  color: var(--gold);
+  text-transform: uppercase;
+}
+
+#brand h1 {
+  font-family: 'Playfair Display', serif;
+  font-size: 20px;
+  font-weight: 700;
+  color: var(--white);
+}
+
+#brand h1 em {
+  font-style: italic;
+  color: var(--rose);
+}
+
+#brand .tagline {
+  font-size: 9px;
+  color: var(--muted);
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+}
+
+/* Nav links */
+.nav-links {
+  display: flex;
+  gap: 6px;
+  align-items: center;
+}
+
+.nav-link {
+  font-size: 10px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  padding: 6px 14px;
+  border-radius: 6px;
+  color: var(--muted);
+  text-decoration: none;
+  transition: all 0.2s;
+  border: 1px solid transparent;
+}
+
+.nav-link:hover {
+  color: var(--gold);
+  border-color: var(--border);
+}
+
+.nav-link.active {
+  color: var(--gold);
+  border-color: var(--border-strong);
+  background: var(--glass);
+}
+
+/* ── MAIN CONTENT ── */
+#main {
+  flex: 1;
+  padding: 32px 36px;
+  max-width: 1400px;
+  margin: 0 auto;
+  width: 100%;
+}
+
+/* ── PAGE HEADER ── */
+.page-header {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  margin-bottom: 28px;
+}
+
+.page-header-left h2 {
+  font-family: 'Playfair Display', serif;
+  font-size: 32px;
+  color: var(--white);
+}
+
+.page-header-left .sub {
+  font-size: 11px;
+  color: var(--muted);
+  letter-spacing: 0.1em;
+  margin-top: 4px;
+  text-transform: uppercase;
+}
+
+/* ── STATS GRID ── */
+.stats-grid {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 14px;
+  margin-bottom: 28px;
+}
+
+.stat-card {
+  background: var(--glass);
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  padding: 18px 20px;
+  position: relative;
+  overflow: hidden;
+  transition: border-color 0.2s;
+}
+
+.stat-card:hover { border-color: var(--border-strong); }
+
+/* Shimmer line on top */
+.stat-card::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--gold), transparent);
+  opacity: 0.4;
+}
+
+.stat-label {
+  font-size: 9px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin-bottom: 10px;
+}
+
+.stat-value {
+  font-family: 'Playfair Display', serif;
+  font-size: 30px;
+  color: var(--white);
+  line-height: 1;
+}
+
+.stat-value.gold  { color: var(--gold); }
+.stat-value.rose  { color: var(--rose); }
+.stat-value.green { color: var(--success); }
+.stat-value.red   { color: var(--danger); }
+
+.stat-sub {
+  font-size: 10px;
+  color: var(--muted);
+  margin-top: 6px;
+}
+
+/* ── FILTER & SEARCH BAR ── */
+.toolbar {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 20px;
+  flex-wrap: wrap;
+}
+
+.filter-pills {
+  display: flex;
+  gap: 6px;
+}
+
+.pill {
+  font-size: 10px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  padding: 6px 16px;
+  border-radius: 20px;
+  border: 1px solid var(--border);
+  cursor: pointer;
+  color: var(--muted);
+  background: transparent;
+  font-family: 'Syne', sans-serif;
+  transition: all 0.2s;
+}
+
+.pill:hover { border-color: var(--gold); color: var(--gold); }
+
+.pill.active {
+  background: var(--gold);
+  border-color: var(--gold);
+  color: var(--black);
+  font-weight: 700;
+}
+
+.pill.pending  { border-color: var(--warning); color: var(--warning); }
+.pill.pending.active  { background: var(--warning); color: var(--black); }
+.pill.approved { border-color: var(--success); color: var(--success); }
+.pill.approved.active { background: var(--success); color: var(--black); }
+.pill.rejected { border-color: var(--danger); color: var(--danger); }
+.pill.rejected.active { background: var(--danger); color: var(--white); }
+
+/* Search */
+.search-wrap {
+  flex: 1;
+  max-width: 320px;
+}
+
+.search-inner {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  background: var(--glass);
+  border: 1px solid var(--border);
+  border-radius: 40px;
+  padding: 8px 14px;
+  transition: border-color 0.2s;
+}
+
+.search-inner:focus-within { border-color: var(--gold); }
+
+.search-icon {
+  width: 14px;
+  height: 14px;
+  opacity: 0.4;
+  flex-shrink: 0;
+  color: var(--white);
+}
+
+.search-input {
+  background: none;
+  border: none;
+  outline: none;
+  color: var(--white);
+  font-family: 'Syne', sans-serif;
+  font-size: 12px;
+  width: 100%;
+  letter-spacing: 0.05em;
+}
+
+.search-input::placeholder { color: var(--muted); }
+
+/* ── FEEDBACK CARDS GRID ── */
+.feedback-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(360px, 1fr));
+  gap: 16px;
+  margin-bottom: 24px;
+}
+
+/* ── INDIVIDUAL FEEDBACK CARD ── */
+.feedback-card {
+  background: var(--glass);
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  padding: 20px 22px;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  transition: border-color 0.2s, transform 0.2s;
+  position: relative;
+  overflow: hidden;
+}
+
+.feedback-card:hover {
+  border-color: var(--border-strong);
+  transform: translateY(-2px);
+}
+
+/* Left accent bar by status */
+.feedback-card::before {
+  content: '';
+  position: absolute;
+  left: 0; top: 0; bottom: 0;
+  width: 3px;
+  border-radius: 16px 0 0 16px;
+}
+
+.feedback-card.pending::before  { background: var(--warning); }
+.feedback-card.approved::before { background: var(--success); }
+.feedback-card.rejected::before { background: var(--danger); }
+
+/* Card header */
+.card-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.reviewer-info {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.reviewer-avatar {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background: rgba(201, 116, 138, 0.15);
+  border: 1px solid rgba(201, 116, 138, 0.3);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--rose);
+  flex-shrink: 0;
+}
+
+.reviewer-avatar.verified {
+  background: rgba(200, 169, 110, 0.15);
+  border-color: rgba(200, 169, 110, 0.3);
+  color: var(--gold);
+}
+
+.reviewer-name {
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--white);
+}
+
+.reviewer-meta {
+  font-size: 10px;
+  color: var(--muted);
+  margin-top: 2px;
+  letter-spacing: 0.05em;
+}
+
+.card-badges {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+/* Status badge */
+.status-badge {
+  font-size: 9px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  padding: 3px 10px;
+  border-radius: 20px;
+  font-weight: 700;
+}
+
+.badge-pending  { background: var(--pending-bg);  color: var(--warning); border: 1px solid rgba(201,168,116,0.3); }
+.badge-approved { background: var(--approved-bg); color: var(--success); border: 1px solid rgba(122,184,122,0.3); }
+.badge-rejected { background: var(--rejected-bg); color: var(--danger);  border: 1px solid rgba(201,116,116,0.3); }
+
+/* Review type badge */
+.type-badge {
+  font-size: 9px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  padding: 3px 8px;
+  border-radius: 20px;
+}
+
+.type-verified { background: rgba(200,169,110,0.12); color: var(--gold); border: 1px solid rgba(200,169,110,0.25); }
+.type-guest    { background: var(--glass); color: var(--muted); border: 1px solid var(--border); }
+
+/* Star rating */
+.star-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.stars {
+  display: flex;
+  gap: 3px;
+}
+
+.star {
+  font-size: 14px;
+  color: var(--muted);
+  opacity: 0.3;
+}
+
+.star.filled { color: var(--gold); opacity: 1; }
+
+.rating-number {
+  font-family: 'Playfair Display', serif;
+  font-size: 18px;
+  color: var(--gold);
+}
+
+.service-tag {
+  font-size: 10px;
+  color: var(--muted);
+  background: var(--glass);
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  padding: 2px 10px;
+  letter-spacing: 0.05em;
+}
+
+/* Comment text */
+.review-comment {
+  font-family: 'Playfair Display', serif;
+  font-size: 13px;
+  color: var(--white);
+  opacity: 0.8;
+  line-height: 1.8;
+  font-style: italic;
+}
+
+/* Admin reply */
+.admin-reply {
+  background: rgba(200, 169, 110, 0.06);
+  border: 1px solid rgba(200, 169, 110, 0.18);
+  border-radius: 10px;
+  padding: 12px 14px;
+}
+
+.admin-reply-label {
+  font-size: 9px;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin-bottom: 6px;
+}
+
+.admin-reply-text {
+  font-size: 12px;
+  color: var(--white);
+  opacity: 0.75;
+  line-height: 1.7;
+}
+
+/* Reply input */
+.reply-area {
+  display: none;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.reply-area.open { display: flex; }
+
+.reply-textarea {
+  width: 100%;
+  background: var(--glass);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 10px 14px;
+  color: var(--white);
+  font-family: 'Syne', sans-serif;
+  font-size: 12px;
+  resize: vertical;
+  min-height: 70px;
+  outline: none;
+  transition: border-color 0.2s;
+  line-height: 1.6;
+}
+
+.reply-textarea:focus { border-color: var(--gold); }
+.reply-textarea::placeholder { color: var(--muted); }
+
+/* Card actions */
+.card-actions {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+  border-top: 1px solid rgba(255,255,255,0.05);
+  padding-top: 12px;
+  margin-top: 2px;
+}
+
+.card-date {
+  font-size: 10px;
+  color: var(--muted);
+  letter-spacing: 0.05em;
+  flex: 1;
+  display: flex;
+  align-items: center;
+}
+
+/* ── BUTTONS ── */
+.btn {
+  font-family: 'Syne', sans-serif;
+  font-size: 10px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  padding: 7px 16px;
+  border-radius: 8px;
+  cursor: pointer;
+  border: 1px solid var(--border);
+  background: transparent;
+  color: var(--muted);
+  transition: all 0.2s;
+}
+
+.btn:hover { border-color: var(--gold); color: var(--gold); }
+
+.btn-approve {
+  color: var(--success);
+  border-color: rgba(122, 184, 122, 0.35);
+}
+.btn-approve:hover { background: var(--approved-bg); border-color: var(--success); }
+
+.btn-reject {
+  color: var(--danger);
+  border-color: rgba(201, 116, 116, 0.3);
+}
+.btn-reject:hover { background: var(--rejected-bg); border-color: var(--danger); }
+
+.btn-reply {
+  color: var(--gold);
+  border-color: rgba(200, 169, 110, 0.3);
+}
+.btn-reply:hover { background: rgba(200, 169, 110, 0.08); border-color: var(--gold); }
+
+.btn-send {
+  background: var(--gold);
+  border-color: var(--gold);
+  color: var(--black);
+  font-weight: 700;
+}
+.btn-send:hover { background: #d4b77c; transform: translateY(-1px); box-shadow: 0 4px 16px rgba(200,169,110,0.25); }
+
+.btn-delete {
+  color: var(--danger);
+  border-color: rgba(201, 116, 116, 0.2);
+}
+.btn-delete:hover { background: var(--rejected-bg); border-color: var(--danger); }
+
+.btn-primary {
+  background: var(--gold);
+  border-color: var(--gold);
+  color: var(--black);
+  font-weight: 700;
+  padding: 9px 22px;
+  font-size: 11px;
+}
+.btn-primary:hover {
+  background: #d4b77c;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 20px rgba(200,169,110,0.3);
+}
+
+/* ── EMPTY STATE ── */
+.empty-state {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 80px 40px;
+  gap: 16px;
+}
+
+.empty-icon {
+  font-family: 'Playfair Display', serif;
+  font-style: italic;
+  color: var(--gold);
+  font-size: 56px;
+  opacity: 0.15;
+}
+
+.empty-text {
+  font-size: 12px;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+/* ── MODAL ── */
+#modal-overlay {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.7);
+  backdrop-filter: blur(8px);
+  z-index: 100;
+  align-items: center;
+  justify-content: center;
+}
+
+#modal-overlay.open { display: flex; }
+
+#modal {
+  background: #111110;
+  border: 1px solid var(--border-strong);
+  border-radius: 20px;
+  width: 500px;
+  padding: 32px;
+  position: relative;
+  animation: modalIn 0.25s ease;
+}
+
+/* Gold shimmer on modal */
+#modal::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 40px; right: 40px;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--gold), transparent);
+  opacity: 0.5;
+}
+
+@keyframes modalIn {
+  from { opacity: 0; transform: scale(0.96) translateY(10px); }
+  to   { opacity: 1; transform: scale(1) translateY(0); }
+}
+
+#modal h3 {
+  font-family: 'Playfair Display', serif;
+  font-size: 22px;
+  color: var(--white);
+  margin-bottom: 4px;
+}
+
+#modal .modal-sub {
+  font-size: 10px;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin-bottom: 24px;
+}
+
+/* Form */
+.form-row    { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin-bottom: 14px; }
+.form-single { margin-bottom: 14px; }
+
+.form-group label {
+  display: block;
+  font-size: 9px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin-bottom: 6px;
+}
+
+.form-group input,
+.form-group select,
+.form-group textarea {
+  width: 100%;
+  background: var(--glass);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 10px 14px;
+  color: var(--white);
+  font-family: 'Syne', sans-serif;
+  font-size: 13px;
+  outline: none;
+  transition: border-color 0.2s;
+  -webkit-appearance: none;
+}
+
+.form-group select option { background: #1a1916; color: var(--white); }
+
+.form-group input:focus,
+.form-group select:focus,
+.form-group textarea:focus {
+  border-color: var(--gold);
+  background: rgba(200, 169, 110, 0.05);
+}
+
+.form-group textarea { resize: vertical; min-height: 80px; line-height: 1.6; }
+
+/* Star rating input */
+.star-input {
+  display: flex;
+  gap: 8px;
+  margin-top: 4px;
+}
+
+.star-btn {
+  font-size: 22px;
+  cursor: pointer;
+  color: var(--muted);
+  opacity: 0.35;
+  background: none;
+  border: none;
+  transition: all 0.15s;
+  padding: 0;
+}
+
+.star-btn:hover,
+.star-btn.selected { color: var(--gold); opacity: 1; }
+
+.modal-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+  margin-top: 24px;
+  padding-top: 20px;
+  border-top: 1px solid var(--border);
+}
+
+/* ── TOAST ── */
+#toast {
+  position: fixed;
+  bottom: 24px;
+  right: 24px;
+  background: var(--charcoal);
+  border: 1px solid var(--border-strong);
+  border-radius: 12px;
+  padding: 12px 20px;
+  font-size: 12px;
+  letter-spacing: 0.05em;
+  color: var(--white);
+  z-index: 200;
+  opacity: 0;
+  transform: translateY(10px);
+  transition: all 0.3s;
+  pointer-events: none;
+}
+
+#toast.show { opacity: 1; transform: translateY(0); }
+
+/* ── SECTION TITLE ── */
+.section-title {
+  font-size: 9px;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin-bottom: 16px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.section-title::after {
+  content: '';
+  flex: 1;
+  height: 1px;
+  background: var(--border);
+}
+
+/* ── ANIMATIONS ── */
+@keyframes fadeSlideIn {
+  from { opacity: 0; transform: translateY(12px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+.animate-in { animation: fadeSlideIn 0.35s ease forwards; }
+
+.feedback-card:nth-child(1) { animation-delay: 0.00s; }
+.feedback-card:nth-child(2) { animation-delay: 0.05s; }
+.feedback-card:nth-child(3) { animation-delay: 0.10s; }
+.feedback-card:nth-child(4) { animation-delay: 0.15s; }
+.feedback-card:nth-child(5) { animation-delay: 0.20s; }
+.feedback-card:nth-child(6) { animation-delay: 0.25s; }
+
+/* ── SCROLLBAR ── */
+::-webkit-scrollbar { width: 4px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb { background: var(--border); border-radius: 4px; }
+
+/* ── RESPONSIVE ── */
+@media (max-width: 1100px) {
+  .stats-grid { grid-template-columns: repeat(3, 1fr); }
+}
+
+@media (max-width: 900px) {
+  #navbar    { padding: 14px 20px; }
+  #main      { padding: 20px; }
+  .stats-grid { grid-template-columns: repeat(2, 1fr); }
+  .feedback-grid { grid-template-columns: 1fr; }
+  .page-header { flex-direction: column; align-items: flex-start; gap: 12px; }
+}
+
+@media (max-width: 600px) {
+  .stats-grid  { grid-template-columns: 1fr 1fr; }
+  .form-row    { grid-template-columns: 1fr; }
+  #modal       { width: 95vw; padding: 24px; }
+  .toolbar     { flex-direction: column; align-items: flex-start; }
+  .search-wrap { max-width: 100%; width: 100%; }
+}
+
+    </style>
+</head>
+<body>
+
+<div id="app">
+
+    <!-- ── NAVBAR ── -->
+    <nav id="navbar">
+        <div id="brand">
+            <div class="label">Est. 2024</div>
+            <h1>MIRACLE LADY <em>&</em> Co.</h1>
+            <div class="tagline">Feedback Atelier</div>
+        </div>
+        <div class="nav-links">
+            <a href="salon-crm.html"    class="nav-link">Customers</a>
+            <a href="appointment.html"  class="nav-link">Appointments</a>
+            <a href="services.html"     class="nav-link">Services</a>
+            <a href="staff.html"        class="nav-link">Staff</a>
+            <a href="admin.html"        class="nav-link">Admin</a>
+            <a href="feedback.html"     class="nav-link active">Feedback</a>
+        </div>
+    </nav>
+
+    <!-- ── MAIN ── -->
+    <div id="main">
+
+        <!-- Page header -->
+        <div class="page-header">
+            <div class="page-header-left">
+                <h2>Feedback <em style="font-style:italic;color:var(--rose)">&</em> Reviews</h2>
+                <div class="sub">Customer satisfaction · Moderation panel</div>
+            </div>
+            <button class="btn btn-primary" onclick="openSubmitModal()">
+                + Submit Review
+            </button>
+        </div>
+
+        <!-- Stats grid -->
+        <div class="stats-grid" id="stats-grid"></div>
+
+        <!-- Toolbar: filter + search -->
+        <div class="toolbar">
+            <div class="filter-pills">
+                <button class="pill active" onclick="setFilter('all', this)">All</button>
+                <button class="pill pending"  onclick="setFilter('PENDING', this)">Pending</button>
+                <button class="pill approved" onclick="setFilter('APPROVED', this)">Approved</button>
+                <button class="pill rejected" onclick="setFilter('REJECTED', this)">Rejected</button>
+            </div>
+            <div class="search-wrap">
+                <div class="search-inner">
+                    <svg class="search-icon" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5">
+                        <circle cx="6.5" cy="6.5" r="4.5"/><path d="m10.5 10.5 3 3"/>
+                    </svg>
+                    <input class="search-input" id="search" type="text" placeholder="Search reviews..." oninput="renderCards()">
+                </div>
+            </div>
+        </div>
+
+        <!-- Feedback cards -->
+        <div class="section-title">Reviews</div>
+        <div class="feedback-grid" id="feedback-grid"></div>
+
+        <!-- Empty state -->
+        <div class="empty-state" id="empty-state" style="display:none">
+            <div class="empty-icon">✦</div>
+            <div class="empty-text">No reviews found</div>
+        </div>
+
+    </div>
+</div>
+
+<!-- ── SUBMIT REVIEW MODAL ── -->
+<div id="modal-overlay">
+    <div id="modal">
+        <h3 id="modal-title">Submit Review</h3>
+        <div class="modal-sub">Share your experience</div>
+
+        <div class="form-row">
+            <div class="form-group">
+                <label>Customer</label>
+                <select id="f-customer">
+                    <option value="">Select customer...</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label>Service</label>
+                <select id="f-service">
+                    <option value="">Select service...</option>
+                    <option value="1">Balayage & Toner</option>
+                    <option value="2">Deep Conditioning</option>
+                    <option value="3">Cut & Style</option>
+                    <option value="4">Keratin Treatment</option>
+                    <option value="5">Lash Lift</option>
+                    <option value="6">Full Highlights</option>
+                    <option value="7">Color Retouch</option>
+                    <option value="8">Scalp Treatment</option>
+                    <option value="9">Box Braids</option>
+                </select>
+            </div>
+        </div>
+
+        <div class="form-single">
+            <div class="form-group">
+                <label>Star Rating</label>
+                <div class="star-input" id="star-input">
+                    <button class="star-btn" data-val="1" onclick="setRating(1)">★</button>
+                    <button class="star-btn" data-val="2" onclick="setRating(2)">★</button>
+                    <button class="star-btn" data-val="3" onclick="setRating(3)">★</button>
+                    <button class="star-btn" data-val="4" onclick="setRating(4)">★</button>
+                    <button class="star-btn" data-val="5" onclick="setRating(5)">★</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="form-single">
+            <div class="form-group">
+                <label>Review Type</label>
+                <select id="f-type">
+                    <option value="VERIFIED">Verified Customer</option>
+                    <option value="GUEST">Guest</option>
+                </select>
+            </div>
+        </div>
+
+        <div class="form-single">
+            <div class="form-group">
+                <label>Comment</label>
+                <textarea id="f-comment" placeholder="Share your experience at Miracle Lady Salon..."></textarea>
+            </div>
+        </div>
+
+        <div class="modal-actions">
+            <button class="btn" onclick="closeModal()">Cancel</button>
+            <button class="btn btn-send" onclick="saveFeedback()">Submit Review</button>
+        </div>
+    </div>
+</div>
+
+<!-- ── TOAST ── -->
+<div id="toast"></div>
+
+<script>
+// ── SAMPLE DATA ──
+let feedbacks = [
+    {
+        id: 1,
+        customerId: 1, customerName: "Leona Perera",
+        serviceId: 1, serviceName: "Balayage & Toner",
+        rating: 5,
+        comment: "Absolutely stunning results! The colour blending was perfect and my hair feels incredibly healthy. The team made me feel so welcome from the moment I walked in. I'll definitely be back!",
+        adminReply: "Thank you so much, Leona! We're thrilled you loved your balayage. See you at your next appointment! 💛",
+        status: "APPROVED", reviewType: "VERIFIED",
+        submittedAt: "2026-04-28", repliedAt: "2026-04-29"
+    },
+    {
+        id: 2,
+        customerId: 2, customerName: "Himali Fernando",
+        serviceId: 7, serviceName: "Color Retouch",
+        rating: 4,
+        comment: "Great colour retouch as always. The only reason I'm not giving 5 stars is the wait time was a bit longer than expected. But the result was gorgeous!",
+        adminReply: null,
+        status: "PENDING", reviewType: "VERIFIED",
+        submittedAt: "2026-04-30", repliedAt: null
+    },
+    {
+        id: 3,
+        customerId: 3, customerName: "Samanali Biseka",
+        serviceId: 5, serviceName: "Lash Lift",
+        rating: 5,
+        comment: "My first time here and I am obsessed! The lash lift looks so natural and lifted. The staff are incredibly professional and made sure I was comfortable throughout.",
+        adminReply: null,
+        status: "APPROVED", reviewType: "GUEST",
+        submittedAt: "2026-05-01", repliedAt: null
+    },
+    {
+        id: 4,
+        customerId: 4, customerName: "Nadini Hansana",
+        serviceId: 6, serviceName: "Full Highlights",
+        rating: 5,
+        comment: "I have been coming to Miracle Lady for 6 years and the quality is always exceptional. Stylist Mei knows my hair like no one else. The highlight formula is always perfect.",
+        adminReply: "Nadini, you are such a treasured client! Mei always looks forward to your visits. Thank you for your loyalty. ✨",
+        status: "APPROVED", reviewType: "VERIFIED",
+        submittedAt: "2026-04-15", repliedAt: "2026-04-16"
+    },
+    {
+        id: 5,
+        customerId: 5, customerName: "Amanda Sewwandi",
+        serviceId: 8, serviceName: "Scalp Treatment",
+        rating: 3,
+        comment: "The scalp treatment was good but I noticed some products may have contained synthetic fragrance. I had mentioned my allergy during booking — please double-check product ingredients.",
+        adminReply: null,
+        status: "PENDING", reviewType: "VERIFIED",
+        submittedAt: "2026-05-04", repliedAt: null
+    },
+    {
+        id: 6,
+        customerId: 1, customerName: "Leona Perera",
+        serviceId: 4, serviceName: "Keratin Treatment",
+        rating: 2,
+        comment: "The keratin treatment result was okay but took much longer than quoted. I had to reschedule other plans. The staff were apologetic but it was still frustrating.",
+        adminReply: null,
+        status: "REJECTED", reviewType: "VERIFIED",
+        submittedAt: "2026-03-20", repliedAt: null
+    },
+];
+
+const customers = [
+    { id: 1, name: "Leona Perera" },
+    { id: 2, name: "Himali Fernando" },
+    { id: 3, name: "Samanali Biseka" },
+    { id: 4, name: "Nadini Hansana" },
+    { id: 5, name: "Amanda Sewwandi" },
+];
+
+let activeFilter = 'all';
+let selectedRating = 0;
+let editingId = null;
+
+// ── INIT ──
+function init() {
+    populateCustomerSelect();
+    renderStats();
+    renderCards();
+}
+
+function populateCustomerSelect() {
+    const sel = document.getElementById('f-customer');
+    customers.forEach(c => {
+        const opt = document.createElement('option');
+        opt.value = c.id;
+        opt.textContent = c.name;
+        sel.appendChild(opt);
+    });
+}
+
+// ── STATS ──
+function renderStats() {
+    const total    = feedbacks.length;
+    const pending  = feedbacks.filter(f => f.status === 'PENDING').length;
+    const approved = feedbacks.filter(f => f.status === 'APPROVED').length;
+    const rejected = feedbacks.filter(f => f.status === 'REJECTED').length;
+    const approvedItems = feedbacks.filter(f => f.status === 'APPROVED');
+    const avg = approvedItems.length
+        ? (approvedItems.reduce((s, f) => s + f.rating, 0) / approvedItems.length).toFixed(1)
+        : '—';
+
+    document.getElementById('stats-grid').innerHTML = `
+        <div class="stat-card animate-in">
+            <div class="stat-label">Total Reviews</div>
+            <div class="stat-value">${total}</div>
+            <div class="stat-sub">All submissions</div>
+        </div>
+        <div class="stat-card animate-in">
+            <div class="stat-label">Pending</div>
+            <div class="stat-value" style="color:var(--warning)">${pending}</div>
+            <div class="stat-sub">Awaiting moderation</div>
+        </div>
+        <div class="stat-card animate-in">
+            <div class="stat-label">Approved</div>
+            <div class="stat-value green">${approved}</div>
+            <div class="stat-sub">Visible to public</div>
+        </div>
+        <div class="stat-card animate-in">
+            <div class="stat-label">Rejected</div>
+            <div class="stat-value red">${rejected}</div>
+            <div class="stat-sub">Hidden from public</div>
+        </div>
+        <div class="stat-card animate-in">
+            <div class="stat-label">Avg Rating</div>
+            <div class="stat-value gold">${avg}</div>
+            <div class="stat-sub">★ From approved reviews</div>
+        </div>`;
+}
+
+// ── FILTER ──
+function setFilter(f, el) {
+    activeFilter = f;
+    document.querySelectorAll('.pill').forEach(p => p.classList.remove('active'));
+    el.classList.add('active');
+    renderCards();
+}
+
+// ── RENDER CARDS ──
+function renderCards() {
+    const q = document.getElementById('search').value.toLowerCase();
+    let data = feedbacks.filter(f => {
+        const matchFilter = activeFilter === 'all' || f.status === activeFilter;
+        const matchSearch = (f.customerName + f.comment + (f.serviceName||'')).toLowerCase().includes(q);
+        return matchFilter && matchSearch;
+    });
+
+    const grid  = document.getElementById('feedback-grid');
+    const empty = document.getElementById('empty-state');
+
+    if (!data.length) {
+        grid.innerHTML = '';
+        empty.style.display = 'flex';
+        return;
+    }
+    empty.style.display = 'none';
+
+    grid.innerHTML = data.map(f => feedbackCardHTML(f)).join('');
+}
+
+function starsHTML(rating) {
+    return [1,2,3,4,5].map(i =>
+        `<span class="star ${i <= rating ? 'filled' : ''}">★</span>`
+    ).join('');
+}
+
+function initials(name) {
+    return name.split(' ').map(n => n[0]).join('').toUpperCase().slice(0,2);
+}
+
+function feedbackCardHTML(f) {
+    const isVerified = f.reviewType === 'VERIFIED';
+    const statusClass = f.status.toLowerCase();
+    const badgeClass  = 'badge-' + statusClass;
+    const typeClass   = isVerified ? 'type-verified' : 'type-guest';
+    const avatarClass = isVerified ? 'verified' : '';
+
+    const adminReplyHTML = f.adminReply ? `
+        <div class="admin-reply">
+            <div class="admin-reply-label">✦ Salon Response</div>
+            <div class="admin-reply-text">${f.adminReply}</div>
+        </div>` : '';
+
+    const approveBtn  = f.status !== 'APPROVED'
+        ? `<button class="btn btn-approve" onclick="approveFeedback(${f.id})">Approve</button>` : '';
+    const rejectBtn   = f.status !== 'REJECTED'
+        ? `<button class="btn btn-reject"  onclick="rejectFeedback(${f.id})">Reject</button>`  : '';
+    const replyBtn    = !f.adminReply
+        ? `<button class="btn btn-reply"   onclick="toggleReply(${f.id})">Reply</button>`      : '';
+
+    return `
+    <div class="feedback-card ${statusClass} animate-in" id="card-${f.id}">
+        <div class="card-header">
+            <div class="reviewer-info">
+                <div class="reviewer-avatar ${avatarClass}">${initials(f.customerName)}</div>
+                <div>
+                    <div class="reviewer-name">${f.customerName}</div>
+                    <div class="reviewer-meta">${f.submittedAt}${f.serviceName ? ' · ' + f.serviceName : ''}</div>
+                </div>
+            </div>
+            <div class="card-badges">
+                <span class="type-badge ${typeClass}">${isVerified ? 'Verified' : 'Guest'}</span>
+                <span class="status-badge ${badgeClass}">${f.status}</span>
+            </div>
+        </div>
+
+        <div class="star-row">
+            <div class="stars">${starsHTML(f.rating)}</div>
+            <div class="rating-number">${f.rating}.0</div>
+            ${f.serviceName ? `<span class="service-tag">${f.serviceName}</span>` : ''}
+        </div>
+
+        <div class="review-comment">"${f.comment}"</div>
+
+        ${adminReplyHTML}
+
+        <div class="reply-area" id="reply-area-${f.id}">
+            <textarea class="reply-textarea" id="reply-text-${f.id}" placeholder="Write your reply as Miracle Lady Salon..."></textarea>
+            <div style="display:flex;gap:8px;justify-content:flex-end">
+                <button class="btn" onclick="toggleReply(${f.id})">Cancel</button>
+                <button class="btn btn-send" onclick="submitReply(${f.id})">Send Reply</button>
+            </div>
+        </div>
+
+        <div class="card-actions">
+            <div class="card-date">Submitted ${f.submittedAt}</div>
+            ${approveBtn}
+            ${rejectBtn}
+            ${replyBtn}
+            <button class="btn btn-delete" onclick="deleteFeedback(${f.id})">Delete</button>
+        </div>
+    </div>`;
+}
+
+// ── APPROVE ──
+function approveFeedback(id) {
+    const f = feedbacks.find(x => x.id === id);
+    if (f) { f.status = 'APPROVED'; renderStats(); renderCards(); showToast('Review approved ✓'); }
+}
+
+// ── REJECT ──
+function rejectFeedback(id) {
+    const f = feedbacks.find(x => x.id === id);
+    if (f) { f.status = 'REJECTED'; renderStats(); renderCards(); showToast('Review rejected.'); }
+}
+
+// ── TOGGLE REPLY BOX ──
+function toggleReply(id) {
+    const area = document.getElementById('reply-area-' + id);
+    if (area) area.classList.toggle('open');
+}
+
+// ── SUBMIT REPLY ──
+function submitReply(id) {
+    const text = document.getElementById('reply-text-' + id).value.trim();
+    if (!text) { showToast('Please write a reply first.'); return; }
+    const f = feedbacks.find(x => x.id === id);
+    if (f) {
+        f.adminReply = text;
+        f.repliedAt  = new Date().toISOString().slice(0,10);
+        f.status     = 'APPROVED';
+        renderStats(); renderCards();
+        showToast('Reply sent & review approved ✓');
+    }
+}
+
+// ── DELETE ──
+function deleteFeedback(id) {
+    if (!confirm('Delete this review permanently?')) return;
+    feedbacks = feedbacks.filter(x => x.id !== id);
+    renderStats(); renderCards();
+    showToast('Review deleted.');
+}
+
+// ── MODAL ──
+function openSubmitModal() {
+    editingId = null;
+    selectedRating = 0;
+    document.getElementById('modal-title').textContent = 'Submit Review';
+    document.getElementById('f-customer').value = '';
+    document.getElementById('f-service').value  = '';
+    document.getElementById('f-comment').value  = '';
+    document.getElementById('f-type').value     = 'VERIFIED';
+    updateStarDisplay();
+    document.getElementById('modal-overlay').classList.add('open');
+}
+
+function closeModal() {
+    document.getElementById('modal-overlay').classList.remove('open');
+}
+
+// ── STAR RATING ──
+function setRating(val) {
+    selectedRating = val;
+    updateStarDisplay();
+}
+
+function updateStarDisplay() {
+    document.querySelectorAll('.star-btn').forEach(btn => {
+        btn.classList.toggle('selected', parseInt(btn.dataset.val) <= selectedRating);
+    });
+}
+
+// ── SAVE FEEDBACK ──
+function saveFeedback() {
+    const customerId = parseInt(document.getElementById('f-customer').value);
+    const comment    = document.getElementById('f-comment').value.trim();
+
+    if (!customerId)    { showToast('Please select a customer.'); return; }
+    if (!selectedRating){ showToast('Please select a star rating.'); return; }
+    if (!comment)       { showToast('Please write a comment.'); return; }
+
+    const customer    = customers.find(c => c.id === customerId);
+    const serviceEl   = document.getElementById('f-service');
+    const serviceId   = parseInt(serviceEl.value) || null;
+    const serviceName = serviceEl.value ? serviceEl.options[serviceEl.selectedIndex].text : null;
+
+    const newF = {
+        id: Date.now(),
+        customerId,
+        customerName: customer.name,
+        serviceId,
+        serviceName,
+        rating: selectedRating,
+        comment,
+        adminReply: null,
+        status: 'PENDING',
+        reviewType: document.getElementById('f-type').value,
+        submittedAt: new Date().toISOString().slice(0,10),
+        repliedAt: null,
+    };
+
+    feedbacks.unshift(newF);
+    closeModal();
+    renderStats();
+    renderCards();
+    showToast('Review submitted — pending moderation.');
+}
+
+// ── TOAST ──
+function showToast(msg) {
+    const t = document.getElementById('toast');
+    t.textContent = msg;
+    t.classList.add('show');
+    setTimeout(() => t.classList.remove('show'), 2800);
+}
+
+// Close modal on backdrop click
+document.getElementById('modal-overlay').addEventListener('click', e => {
+    if (e.target === document.getElementById('modal-overlay')) closeModal();
+});
+
+// ── START ──
+init();
+</script>
+</body>
+</html>
