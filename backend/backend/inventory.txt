@@ -1,0 +1,3 @@
+43bee811-1e8a-42c8-974e-326ed998bad3|Organic Coconut Shampoo|Hair Care|16|12.5|NatureCare Suppliers|COSMETIC|2027-12-31|true|
+67fdfb8f-7e08-4a85-b1e7-05b1d091e913|Premium Face Serum|Skin Care|3|45.0|Glow Cosmetics|COSMETIC|2026-10-31|false
+34a2c25c-e1d0-43e1-a069-56bf18b2c6c1|Professional Hair Dryer HD200|Equipment|5|85.0|SalonEquip Ltd|EQUIPMENT|24|2026-01-15

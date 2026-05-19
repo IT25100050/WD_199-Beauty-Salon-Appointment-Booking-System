@@ -1,0 +1,3 @@
+ 
+5b8bfc0e-1c23-4d42-bf32-050ca77b8b57|customer|$2a$10$S9pVQwb2Y2uoNN5zAGbHOe3aKj3PWQmzOjo.ohh4oRQsZnzxJBaSm|customer@gmail.com|CUSTOMER|0771234567|123 Salon Way, Cityville
+167f1279-1efa-439d-b2c1-cb72a3685d55|chithara_dilneth|$2a$10$MHGQ7oI4BLrvfmyTQWamc.Z8p99lPpnIwhU4H0ND8q7ndIKb2DVDO|chithara.dilneth1@gmail.com|CUSTOMER||
