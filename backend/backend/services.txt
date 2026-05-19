@@ -1,0 +1,3 @@
+fa2a54b1-376c-46b2-a026-f988a16bf7c6|Standard Haircut|Haircut|30.0|30|true|REGULAR|Shampoo & Conditioner|0.0
+6700cfcd-e590-4326-b279-94f98ae167a8|Bridal Glamour Makeup|Bridal|150.0|120|true|PREMIUM|VIP Room, Luxury Cosmetics Brand Kit|25.0
+ab5993fd-dfac-456d-b5c1-94cc23ed1b61|Organic Scalap|null|500.0|60|false|REGULAR||0.0
