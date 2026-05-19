@@ -1,0 +1,1 @@
+62bbdcd5-3a00-46b9-b8c5-9f2803998e2b|admin|$2a$10$/S3LEX1FWDylIKUV48B2xeVK3aWDgAXNnoug1j02nyydXIRremD52|admin@beautysalon.com|ADMIN|true
