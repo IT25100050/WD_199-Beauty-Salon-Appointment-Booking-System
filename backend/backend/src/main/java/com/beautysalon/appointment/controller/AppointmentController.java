@@ -50,6 +50,12 @@ public class AppointmentController {
         return ResponseEntity.ok(appointmentService.cancelAppointment(id));
     }
 
+    @DeleteMapping("/{id}")
+public ResponseEntity<Void> deleteAppointment(@PathVariable String id) {
+    appointmentService.deleteAppointment(id);
+    return ResponseEntity.noContent().build();
+}
+
     @GetMapping("/history/{customerId}")
     public ResponseEntity<List<AppointmentDto>> getAppointmentHistory(@PathVariable String customerId) {
         return ResponseEntity.ok(appointmentService.getAppointmentHistory(customerId));
