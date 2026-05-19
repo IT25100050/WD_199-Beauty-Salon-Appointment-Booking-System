@@ -1,0 +1,2 @@
+cad2507d-2bd6-4056-8683-154232f5a8a4|jane_hair|$2a$10$vovmYfIdpyG0IiQvYnCOqe/uE9CN4k4xTMhi5Z5F29KyAu/RsiiBK|jane@beautysalon.com|STAFF|Hair Stylist|Monday-Friday 9AM-5PM|true
+30d2c16c-91df-4a8e-8578-13ddf1a93e97|mary_nails|$2a$10$UvjSnOLVFtljXo2xcCdxyOvyTJtaeN6ruGTFYaHHd/VgLqb3/SEvW|mary@beautysalon.com|STAFF|Nail Artist|Wednesday-Sunday 10AM-6PM|true
