@@ -94,6 +94,13 @@ public class AppointmentService {
         return convertToDto(appointment);
     }
 
+    public void deleteAppointment(String id) {
+    Appointment appointment = appointmentRepository.findById(id)
+            .orElseThrow(() -> new RuntimeException("Appointment not found with ID: " + id));
+
+    appointmentRepository.deleteById(appointment.getId());
+}
+
     public List<AppointmentDto> getAppointmentHistory(String customerId) {
         return appointmentRepository.findAll().stream()
                 .filter(a -> a.getCustomerId().equals(customerId))
