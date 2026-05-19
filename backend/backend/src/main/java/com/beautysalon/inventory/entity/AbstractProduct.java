@@ -1,12 +1,12 @@
 package com.beautysalon.inventory.entity;
 
+import lombok.AllArgsConstructor;
 import lombok.Data;
-import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 
 @Data
 @NoArgsConstructor
-@EqualsAndHashCode(callSuper = true)
+@AllArgsConstructor
 /**
  * OOP Concepts Applied:
  * - Encapsulation: Private fields with public getters and setters to protect state.
@@ -14,11 +14,11 @@ import lombok.NoArgsConstructor;
  * - Abstraction: Defining core properties without exposing complex implementation logic.
  * - Polymorphism: Allowing entities to be treated as their abstract types.
  */
-public class Product extends AbstractProduct {
-    private String imageUrl;
-
-    public Product(String id, String name, String category, int quantity, double price, String supplier, String imageUrl) {
-        super(id, name, category, quantity, price, supplier);
-        this.imageUrl = imageUrl;
-    }
+public abstract class AbstractProduct {
+    private String id;
+    private String name;
+    private String category;
+    private int quantity;
+    private double price;
+    private String supplier;
 }

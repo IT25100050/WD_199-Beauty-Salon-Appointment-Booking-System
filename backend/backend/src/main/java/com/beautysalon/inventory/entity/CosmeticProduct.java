@@ -14,11 +14,13 @@ import lombok.NoArgsConstructor;
  * - Abstraction: Defining core properties without exposing complex implementation logic.
  * - Polymorphism: Allowing entities to be treated as their abstract types.
  */
-public class Product extends AbstractProduct {
-    private String imageUrl;
+public class CosmeticProduct extends Product {
+    private String expiryDate;
+    private boolean isOrganic;
 
-    public Product(String id, String name, String category, int quantity, double price, String supplier, String imageUrl) {
-        super(id, name, category, quantity, price, supplier);
-        this.imageUrl = imageUrl;
+    public CosmeticProduct(String id, String name, String category, int quantity, double price, String supplier, String imageUrl, String expiryDate, boolean isOrganic) {
+        super(id, name, category, quantity, price, supplier, imageUrl);
+        this.expiryDate = expiryDate;
+        this.isOrganic = isOrganic;
     }
 }
